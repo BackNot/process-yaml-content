@@ -480,10 +480,12 @@ class Practice(ModelObject):
 class MaturityLevel(ModelObject):
     @staticmethod
     def itsme(obj):
-        try:
-            return obj['type'] == 'MaturityLevel'
-        except KeyError:
-            return False
+        """
+        no easy way of identifying it. has 3 keys, id, number, description.
+        """
+        if 'number' in obj:
+            return True
+        return False
 
     def getNumber(self):
         return self.data['number']
