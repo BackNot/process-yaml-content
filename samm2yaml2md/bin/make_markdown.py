@@ -33,7 +33,7 @@ def reformatList(l, indent):
 """
 def reformatMultiParagraph2(l, indent):
     m = re.sub("\n-", "\n{}-".format(" " * indent), l)
-    l = re.sub("\n\*", "\n{}*".format(" " * indent), m)
+    l = re.sub(r"\n\*", "\n{}*".format(" " * indent), m)
     #pdb.set_trace()
     m = re.sub(r"\n\n(?!\s)([\w].*)", r"\n\n{}\1".format(" " * indent), l, flags=re.UNICODE)
     return m
@@ -272,7 +272,7 @@ if __name__ == '__main__':
         {{namespace:item}}
         {{namespace:item.subitem}}
     """
-    pat = re.compile('{{([\w_-]+:)?(.+?)}}')
+    pat = re.compile(r'{{([\w_-]+:)?(.+?)}}')
 
     for l in lines:
         print(re.sub(pat, doit, l.rstrip()))
